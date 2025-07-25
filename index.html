@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feliz aniversário Letícia Rebouças</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
@@ -12,7 +11,6 @@
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       color: #333;
       text-align: center;
-      padding: 0;
     }
 
     .tela-inicial {
@@ -79,7 +77,32 @@
       width: 100%;
       height: auto;
       border-radius: 12px;
+      cursor: pointer;
       box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    .lightbox:active {
+      display: none;
     }
   </style>
 </head>
@@ -106,27 +129,41 @@
       Saiba que eu te amo muito! 💕
     </p>
     <div class="galeria">
-      <img src="foto1.jpg" alt="Foto 1">
-      <img src="foto2.jpg" alt="Foto 2">
-      <img src="foto3.jpg" alt="Foto 3">
-      <img src="foto4.jpg" alt="Foto 4">
-      <img src="foto5.jpg" alt="Foto 5">
-      <img src="foto6.jpg" alt="Foto 6">
-      <img src="foto7.jpg" alt="Foto 7">
-      <img src="foto8.jpg" alt="Foto 8">
-      <img src="foto9.jpg" alt="Foto 9">
-      <img src="foto10.jpg" alt="Foto 10">
+      <img src="foto1.jpg" alt="Foto 1" onclick="abrirLightbox(this.src)">
+      <img src="foto2.jpg" alt="Foto 2" onclick="abrirLightbox(this.src)">
+      <img src="foto3.jpg" alt="Foto 3" onclick="abrirLightbox(this.src)">
+      <img src="foto4.jpg" alt="Foto 4" onclick="abrirLightbox(this.src)">
+      <img src="foto5.jpg" alt="Foto 5" onclick="abrirLightbox(this.src)">
+      <img src="foto6.jpg" alt="Foto 6" onclick="abrirLightbox(this.src)">
+      <img src="foto7.jpg" alt="Foto 7" onclick="abrirLightbox(this.src)">
+      <img src="foto8.jpg" alt="Foto 8" onclick="abrirLightbox(this.src)">
+      <img src="foto9.jpg" alt="Foto 9" onclick="abrirLightbox(this.src)">
+      <img src="foto10.jpg" alt="Foto 10" onclick="abrirLightbox(this.src)">
     </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
+    <img id="lightbox-img" src="" alt="Imagem em tela cheia">
   </div>
 
   <script>
     function iniciarSite() {
-      const tela = document.getElementById('tela-inicial');
-      const conteudo = document.getElementById('conteudo');
+      document.getElementById('tela-inicial').style.display = 'none';
+      document.getElementById('conteudo').style.display = 'block';
       const musica = document.getElementById('bg-music');
-      tela.style.display = 'none';
-      conteudo.style.display = 'block';
-      musica.play().catch(e => console.log("Erro ao tocar música:", e));
+      musica.play().catch(e => console.log("Autoplay bloqueado:", e));
+    }
+
+    function abrirLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.style.display = 'flex';
+    }
+
+    function fecharLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
     }
   </script>
 
